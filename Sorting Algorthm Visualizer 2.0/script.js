@@ -44,10 +44,12 @@ function createRandomArray() {
     maxRange = document.getElementById("maxVal").value;
 
     //? Para que no se pase de verga el usuario
-    if (maxRange < 1) {
+    if (maxRange < 2) {
         maxRange = 1;
+        document.getElementById("maxVal").value = 2;
     } else if (maxRange > 75) {
         maxRange = 75
+        document.getElementById("maxVal").value = 75;
     }
 
 
@@ -64,8 +66,10 @@ function valChange() {
     //?Igual para que no quiera meter 500,000 barras el culero
     if (numOfBars < 2) {
         numOfBars = 2;
+        document.getElementById("elements").value = 2;
     }else if(numOfBars > 50){
         numOfBars = 50;
+        document.getElementById("elements").value = 50;
     }
 
     unsortedArray = new Array(numOfBars);
@@ -112,6 +116,25 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
+//*Creamos el algoritmo actual funcion la cual cambiara dependiendo la seleccion
+let algoritmoActual = nonRecursiveBubbleSort;
+
+//Funcion para deshabilitar botones mientras se sortea
+function disableButtons() {
+    document.getElementById("sort-btn").disabled = true;
+    document.getElementById("randomize-array-btn").disabled = true;
+    document.getElementById("maxVal").disabled = true;
+    document.getElementById("elements").disabled = true;
+}
+
+//Funcion para habilitar botones
+function enableButtons() {
+    document.getElementById("sort-btn").disabled = false;
+    document.getElementById("randomize-array-btn").disabled = false;
+    document.getElementById("maxVal").disabled = false;
+    document.getElementById("elements").disabled = false;
+}
+
 //*Funcion para cuando el usuario cambie el algoritmo a usar
 function cambio() {
     let algo = document.getElementById("algos").value
@@ -119,6 +142,7 @@ function cambio() {
     if (algo === "insertion") {
         displayOneInfo(0, infoArr);
     } else if (algo === "bubble") {
+        algoritmoActual = nonRecursiveBubbleSort;
         displayOneInfo(1, infoArr);
     } else if (algo === "selection") {
         displayOneInfo(2, infoArr);
@@ -133,25 +157,20 @@ function cambio() {
 }
 
 
-let algoritmoActual = nonRecursiveBubbleSort;
+//Boton de parar
+let stopVal = false;
 
-/*
-sort_btn.addEventListener("click", function(){
-    let sortedArray = nonRecursiveBubbleSort(unsortedArray);
-    console.log(sortedArray)
-})
-*/
-
+//Valor para ver si acabo de sortear
+let completado = false;
 
 //Funcion de bubble Sort
 async function nonRecursiveBubbleSort(array) {
     let bars = document.getElementsByClassName("bar")
-
-    for (let i = 0; i < bars.length; i++) {
-        bars[i].innerHTML = unsortedArray[i]
-    }
+    document.getElementById("stop").disabled = false
 
     for (let i = 0; i < array.length; i++) {
+        let ultimaI = 0;
+
         for (let j = 0; j < array.length - i - 1; j++) {
             for (let k = 0; k < array.length; k++) {
                 if (k !== j && k !== j + 1) {
@@ -172,10 +191,29 @@ async function nonRecursiveBubbleSort(array) {
                 await sleep(velocidad)
             }
 
+            if(stopVal){
+                ultimaI = i;
+                break;
+            }
+
         }
+
+        if (ultimaI === array.length-1) {
+            completado = true;
+        }
+
     }
+
+
+    document.getElementById("stop").disabled = true
+    stopVal = false
+    enableButtons();
+
+    if (completado) {
+        document.getElementById("sort-btn").disabled = true
+    }
+
     return array
 }
-
 
 

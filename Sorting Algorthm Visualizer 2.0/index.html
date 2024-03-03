@@ -61,8 +61,8 @@
                     <label for="algos" style="text-align: center; font-size: 18px;">Choose an Algorithm:</label>
                     <br>
                     <select id="algos" name="algos" onchange="cambio()">
-                        <option value="insertion" selected>Insertion</option>
-                        <option value="bubble">Bubble</option>
+                        <option value="insertion">Insertion</option>
+                        <option value="bubble" selected>Bubble</option>
                         <option value="selection">Selection</option>
                         <option value="merge">Merge</option>
                         <option value="heap">Heap</option>
@@ -71,9 +71,9 @@
                 </div>
 
                 <div>
-                    <button id="sort-btn">Sort</button>
-                    <button id="pause">Pause</button>
-                    <button id="randomize-array-btn">Randomize Array</button>
+                    <button id="sort-btn" onclick="algoritmoActual(unsortedArray), disableButtons()">Sort</button>
+                    <button id="stop" onclick="stopVal = true" disabled>Stop</button>
+                    <button id="randomize-array-btn" onclick="enableButtons()">Randomize Array</button>
                 </div>
             </div>
 
