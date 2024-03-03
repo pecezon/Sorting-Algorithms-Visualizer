@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Sorting Algorithms Visualizer</title>
+</head>
+<body>
+    <div class="container">
+
+        <header>
+            <h1>Sorting Algorithms Visualizer</h1>
+            <h2>By Pecezon</h2>
+        </header>
+
+        <div class="bars-container" id="bars-container"></div>
+
+        <div class="buttons-container">
+
+            <div class="btns">
+                <div id="insertionSortInfo" class="info">
+                    <h3>About Insertion Sort</h3>
+                    <b>Complexity O(n^2)</b>
+                    <p>The <a href="https://brilliant.org/wiki/insertion/">insertion sort</a> algorithm iterates through an input array and removes one element per iteration, finds the place the element belongs in the array, and then places it there. This process grows a sorted list from left to right. </p>
+                </div>
+                <div id="bubbleSortInfo" class="info">
+                    <h3>About Bubble Sort</h3>
+                    <b>Complexity O(n^2)</b>
+                    <p><a href="https://brilliant.org/wiki/bubble-sort/">Bubble sort</a> is a simple, inefficient sorting algorithm used to sort lists. It is generally one of the first algorithms taught in computer science courses because it is a good algorithm to learn to build intuition about sorting.</p>
+                </div>
+                <div id="selectionSortInfo" class="info">
+                    <h3>About Selection Sort</h3>
+                    <b>Complexity O(n^2)</b>
+                    <p>The <a href="https://www.geeksforgeeks.org/selection-sort/">Selection Sort</a>  repeatedly selects the smallest (or largest) element from the unsorted portion of the list and swaps it with the first element of the unsorted part. This process is repeated for the remaining unsorted portion until the entire list is sorted. </p>
+                </div>
+                <div id="mergeSortInfo" class="info">
+                    <h3>About Merge Sort</h3>
+                    <b>Complexity O(nlogn)</b>
+                    <p>The <a href="https://brilliant.org/wiki/merge/">merge sort</a> algorithm focuses on how to merge together two pre-sorted arrays such that the resulting array is also sorted. Mergesort can be implemented either recursively or iteratively.</p>
+                </div>
+                <div id="heapSortInfo" class="info">
+                    <h3>About Heap Sort</h3>
+                    <b>Complexity O(nlogn)</b>
+                    <p>The binary heap data structure allows the <a href="https://brilliant.org/wiki/heap-sort/">heapsort</a> algorithm to take advantage of the heap's heap properties and the heapsort algorithm makes use of the efficient running time for inserting to and deleting from the heap.</p>
+                </div>
+                <div id="quickSortInfo" class="info">
+                    <h3>About Quick Sort</h3>
+                    <b>Complexity O(n^2)</b>
+                    <p><a href="https://brilliant.org/wiki/quick-sort/">Quicksort</a> uses divide and conquer to sort an array. Divide and conquer is a technique used for breaking algorithms down into subproblems, solving the subproblems, and then combining the results back together to solve the original problem.</p>
+                </div>
+
+            </div>
+
+            <div class="btns" id="middle">
+
+                <div style="display: flex; flex-direction: column; width: 90%; justify-content: center;">
+                    <label for="algos" style="text-align: center; font-size: 18px;">Choose an Algorithm:</label>
+                    <br>
+                    <select id="algos" name="algos" onchange="cambio()">
+                        <option value="insertion" selected>Insertion</option>
+                        <option value="bubble">Bubble</option>
+                        <option value="selection">Selection</option>
+                        <option value="merge">Merge</option>
+                        <option value="heap">Heap</option>
+                        <option value="quick">Quick</option>
+                    </select>
+                </div>
+
+                <div>
+                    <button id="sort-btn">Sort</button>
+                    <button id="pause">Pause</button>
+                    <button id="randomize-array-btn">Randomize Array</button>
+                </div>
+            </div>
+
+            <div class="btns" id="last" style="display: flex;flex-direction: column; align-items: center; justify-content: space-evenly;">
+                <!--Elements & Max Values Input-->
+                <div style="width: 90%;" style="display: flex;flex-direction: row; align-items: center; justify-content: space-evenly;">
+                    <div style="display: flex;flex-direction: column; align-items: center; justify-content: space-evenly; width: 40%;">
+                        <label for="maxVal">Max Value</label>
+                        <input type="number" id="maxVal" name="maxVal" min="1" max="75" value="20" onchange="valChange()">
+                    </div>
+                    <div style="display: flex;flex-direction: column; align-items: center; justify-content: space-evenly; width: 40%;">
+                        <label for="elements">Elements</label>
+                        <input type="number" id="elements" name="elements" min="1" max="50" value= "20" onchange="valChange()"> 
+                    </div>
+                </div>
+                <!--Speed Controler-->
+                <div style="width: 90%;">
+                    <label for="speed" id="speedLabel">Speed (300ms)</label>
+                    <input type="range" id="speed" name="speed" min="100" max="500" step="100" value="300" onchange="speedChange()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
